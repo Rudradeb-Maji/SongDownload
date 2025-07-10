@@ -14,10 +14,8 @@ const GetSong = ({ siteName, route }) => {
       //   artist: artist,
       // });
       const response = await axios.post(
-        `https://song-download-server.vercel.app/${route}`,
-        {
-          artist: artist,
-        }
+        `${process.env.REACT_APP_BACKEND_URL}/${route}`,
+        { artist }
       );
 
       setArtist("");

@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://song-download-8x2agcqrq-rudras-projects-ce25cff2.vercel.app", // or '*' for all
+    origin: "*", // or '*' for all
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type"],
   })

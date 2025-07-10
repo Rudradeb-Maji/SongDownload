@@ -10,9 +10,15 @@ const GetSong = ({ siteName, route }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post(`http://localhost:3000/site/${route}`, {
-        artist: artist,
-      });
+      // const response = await axios.post(`http://localhost:3000/site/${route}`, {
+      //   artist: artist,
+      // });
+      const response = await axios.post(
+        `https://song-download-server.vercel.app/${route}`,
+        {
+          artist: artist,
+        }
+      );
 
       setArtist("");
       if (response.data.data.length)
@@ -85,9 +91,9 @@ const GetSong = ({ siteName, route }) => {
                 placeholder="Dj Rx Remix (Paharpur Se)"
                 className="w-full p-2 outline-none border-1 border-zinc-500 rounded-md "
               />
-              <button
-                className="text-white cursor-pointer w-1/2 p-2 outline-none border-1 border-zinc-500 rounded-md hover:bg-amber-500 hover:text-black"
-              >Get songs 🎧</button>
+              <button className="text-white cursor-pointer w-1/2 p-2 outline-none border-1 border-zinc-500 rounded-md hover:bg-amber-500 hover:text-black">
+                Get songs 🎧
+              </button>
             </form>
           </div>
         )}

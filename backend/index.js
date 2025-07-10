@@ -7,10 +7,13 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use(cors({
-  origin: "*", // or replace * with your frontend domain for stricter control
-  methods: ["GET", "POST", "DELETE"],
-}));
+app.use(
+  cors({
+    origin: "https://song-download-8x2agcqrq-rudras-projects-ce25cff2.vercel.app", // or '*' for all
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
 
 const port = 3000 || process.env.PORT;
 app.get("/", (req, res) => {

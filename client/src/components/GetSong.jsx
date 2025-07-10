@@ -19,7 +19,7 @@ const GetSong = ({ siteName, route }) => {
         navigateTo("/songlists", {
           state: {
             songs: response.data.data,
-            message:""
+            message: "",
           },
         });
       else
@@ -85,13 +85,9 @@ const GetSong = ({ siteName, route }) => {
                 placeholder="Dj Rx Remix (Paharpur Se)"
                 className="w-full p-2 outline-none border-1 border-zinc-500 rounded-md "
               />
-              <input
-                type="Submit"
-                name=""
-                id=""
-                placeholder="Get songs 🎧"
-                className="text-white cursor-pointer w-1/4 p-2 outline-none border-1 border-zinc-500 rounded-md hover:bg-amber-500 hover:text-black"
-              />
+              <button
+                className="text-white cursor-pointer w-1/2 p-2 outline-none border-1 border-zinc-500 rounded-md hover:bg-amber-500 hover:text-black"
+              >Get songs 🎧</button>
             </form>
           </div>
         )}

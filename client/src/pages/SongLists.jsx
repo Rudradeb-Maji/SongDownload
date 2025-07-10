@@ -44,6 +44,7 @@
 // ..........................................................
 import React, { useRef } from "react";
 import { useLocation } from "react-router-dom";
+import CustomAudioPlayer from "../components/CustomAudioPlayer";
 
 const SongLists = () => {
   const location = useLocation();
@@ -58,7 +59,7 @@ const SongLists = () => {
     for (let i = 0; i < downloadRefs.current.length; i++) {
       if (downloadRefs.current[i]?.current) {
         downloadRefs.current[i].current.click();
-        await new Promise((resolve) => setTimeout(resolve, 4000)); // 500ms delay
+        await new Promise((resolve) => setTimeout(resolve, 4000)); // 4000ms delay
       }
     }
   };
@@ -69,20 +70,34 @@ const SongLists = () => {
           <p>{message}</p>
         ) : (
           <>
-          <div className="text-xl font-bold mt-3">Total <span className="text-amber-500">{songs.length}</span> songs</div>
+            <div className="text-xl font-bold mt-3">
+              Total <span className="text-amber-500">{songs.length}</span> songs
+            </div>
             <div className="p-4 my-3 gap-2 flex flex-col overflow-auto">
               {songs.map((song, index) => {
                 return (
                   <div className="" key={index}>
-                    <div className="border-1 border-zinc-800 rounded-md p-2 text-amber-500">
-                      <p className="text-white font-bold">{song.title}</p>
-                      <p className="font-semibold text-">{song.artist}</p>
+                    <div className="border-1 border-zinc-800 rounded-md p-2 text-amber-500  relative">
+                      <p className=" text-white font-bold">{song.title}</p>
+                      <p className="font-semibold text-amber-500">
+                        {song.artist}
+                      </p>
+                      <div className="w-full flex justify-center items-center relative">
+                        <audio
+                          className="h-8 mt-2"
+                          controls
+                          src={song.downloadUrl}
+                        ></audio>
+
+                        {/* <CustomAudioPlayer audioUrl={song.downloadUrl}/> */}
+                      </div>
                     </div>
 
                     <a
                       href={song.downloadUrl}
                       download={song.title}
                       ref={downloadRefs.current[index]}
+                      className="hidden"
                     ></a>
                   </div>
                 );

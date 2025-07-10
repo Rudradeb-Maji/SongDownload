@@ -9,8 +9,14 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "*", // or '*' for all
-    methods: ["GET", "POST"],
+    origin: (origin, callback) => {
+      if (!origin || origin.endsWith(".vercel.app") || origin === "http://localhost:3000") {
+        callback(null, true);
+      } else {
+        callback(new Error("CORS not allowed from this origin."));
+      }
+    },
+    methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["Content-Type"],
   })
 );
@@ -22,7 +28,7 @@ app.get("/", (req, res) => {
 
 app.use("/site", siteRouter);
 app.use("/download", downloadRouter);
-app.use('/temp', express.static('temp'));
+app.use("/temp", express.static("temp"));
 app.listen(port, () => {
   console.log(`Server is running at port ${port}`);
 });
@@ -31,5 +37,3 @@ app.listen(port, () => {
 // const website = "https://barmanmusic.com";
 
 // const songList = await barmanMusicScrapeSongLinks(artist);
-
-
